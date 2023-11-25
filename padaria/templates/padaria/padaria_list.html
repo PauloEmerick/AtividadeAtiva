@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Padaria da Maria</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg mb-4" style="background-color: #e3f2fd;" >
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url "padaria_home" %}">Padaria da Maria</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="{%  url "padaria_home"  %}">Home</a>
+                <a  href="{%  url "padaria_cadastrar"  %}" class="nav-link">Cadastrar</a>
+            </div>
+          </div>
+        </div>
+    </nav>
+
+    <main class>
+            <h3>Lista de Clientes</h3>
+            <p>Essa lista de clientes são aqueles interessados em evitar fila de espera para adquirir seu pão e deseje que seja entregue em sua residência!</p>
+    
+
+
+        {% if padaria_list %}
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Nº Clientes</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Horário</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {%for padaria in padaria_list %}
+                        <tr>
+                            <th scope="row">{{ padaria.pk }}</th>
+                            <td>{{ padaria.nome }}</td>
+                            <td>{{ padaria.endereco }}</td>
+                            <td>{{ padaria.telefone }}</td>
+                            <td>{{ padaria.dia }}</td>
+                            <td>
+                                <a href="{%  url "padaria_editar" pk=padaria.pk %}" class="btn btn-primary btn-sm">Editar</a>
+                                <a href="{%  url "padaria_excluir" pk=padaria.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
+        {% else %}
+            <br>
+            <h3>Não há clientes cadastrados!</h3>
+        {% endif %}
+
+        
+
+    </main>
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>
